@@ -16,4 +16,9 @@ class Project extends Model implements HasMedia
         'description',
         'url',
     ];
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
 }

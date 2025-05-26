@@ -32,6 +32,9 @@ class SkillResource extends Resource
                     ->required()
                     ->maxValue(5)
                     ->numeric(),
+                Forms\Components\Select::make('skill_category_id')
+                    ->relationship('category', 'name')
+                    ->required(),
                 SpatieMediaLibraryFileUpload::make('image')
                     ->collection('skills')
                     ->multiple()
@@ -47,6 +50,9 @@ class SkillResource extends Resource
                     ->collection('skills'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('level')

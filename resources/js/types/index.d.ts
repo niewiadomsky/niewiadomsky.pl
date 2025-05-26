@@ -38,12 +38,20 @@ export interface User {
 
 export type BreadcrumbItemType = BreadcrumbItem;
 
+export interface SkillCategory {
+    id: number;
+    name: string;
+    order: number;
+}
+
 export interface Skill {
     id: number;
     name: string;
     description: string | null;
     level: number;
     image: string;
+    order: number;
+    category: SkillCategory;
 }
 
 export interface Project {
@@ -51,7 +59,13 @@ export interface Project {
     name: string;
     description: string | null;
     url: string | null;
+    order: number;
     images: string[];
+    technologies?: string[];
+    github_url?: string | null;
+    created_at?: string;
+    updated_at?: string;
+    skills?: Skill[];
 }
 
 export interface Paginated<T> {

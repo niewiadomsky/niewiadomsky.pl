@@ -26,13 +26,23 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(ZiggyVue)
-            .mount(el);
+        const app = createApp({
+            render: () => h(App, props),
+            mounted() {
+                // Add page transition classes
+                document.body.classList.add('page-transition');
+            },
+        });
+
+        app.use(plugin);
+        app.use(ZiggyVue);
+        app.mount(el);
+
+        return app;
     },
     progress: {
         color: '#4B5563',
+        showSpinner: true,
     },
 });
 

@@ -1,18 +1,21 @@
 <template>
-    <div>
-        <h1>Skills</h1>
-        <ul>
-            <li v-for="skill in skills.data" :key="skill.id">
-                <img :src="skill.image" :alt="skill.name" class="w-10 h-10" />
-                <h2>{{ skill.name }}</h2>
-                <p>{{ skill.description }}</p>
-            </li>
-        </ul>
-        
+    <div class="min-h-screen bg-gray-900">
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection :skills="skills" />
+        <ProjectsSection :projects="projects" />
+        <ContactSection />
+        <FooterSection />
     </div>
 </template>
 
 <script setup lang="ts">
+import AboutSection from '@/components/portfolio/AboutSection.vue';
+import ContactSection from '@/components/portfolio/ContactSection.vue';
+import FooterSection from '@/components/portfolio/FooterSection.vue';
+import HeroSection from '@/components/portfolio/HeroSection.vue';
+import ProjectsSection from '@/components/portfolio/ProjectsSection.vue';
+import SkillsSection from '@/components/portfolio/SkillsSection.vue';
 import { Paginated, Project, Skill } from '@/types';
 
 const props = defineProps<{
@@ -22,5 +25,5 @@ const props = defineProps<{
 </script>
 
 <style scoped>
-
+/* Add any custom styles here if needed */
 </style>

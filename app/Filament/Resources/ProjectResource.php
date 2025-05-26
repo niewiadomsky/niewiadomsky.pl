@@ -32,6 +32,10 @@ class ProjectResource extends Resource
                     ->collection('projects')
                     ->multiple()
                     ->required(),
+                Forms\Components\Select::make('skills')
+                    ->multiple()
+                    ->relationship('skills', 'name')
+                    ->required(),
             ]);
     }
 
@@ -47,6 +51,9 @@ class ProjectResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('media_count')
                     ->counts('media')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('skills.name')
+                    ->label('Skills')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

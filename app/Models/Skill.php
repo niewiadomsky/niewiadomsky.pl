@@ -16,4 +16,14 @@ class Skill extends Model implements HasMedia
         'description',
         'level',
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(SkillCategory::class, 'skill_category_id');
+    }
 }

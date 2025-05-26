@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
