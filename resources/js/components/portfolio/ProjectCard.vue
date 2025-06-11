@@ -19,7 +19,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex space-x-3">
                     <Link
-                        :href="`/project/${project.id}`"
+                        :href="route('project.show', project.id)"
                         class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl"
                     >
                         <span>Zobacz szczegóły</span>

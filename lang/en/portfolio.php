@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'Home',
+    'about' => 'About',
+    'projects' => 'Projects',
+    'skills' => 'Skills',
+    'contact' => 'Contact',
+    'portfolio' => 'Portfolio',
+    'welcome' => 'Welcome to my portfolio',
+    'language_switched' => 'Language switched successfully',
+    'view_project' => 'View Project',
+    'download_cv' => 'Download CV',
+    'get_in_touch' => 'Get in Touch',
+    'lets_work_together' => 'Let\'s work together',
+    'my_name_is' => 'My name is',
+    'iam_a' => 'I\'m a',
+    'developer' => 'Developer',
+    'designer' => 'Designer',
+    'freelancer' => 'Freelancer',
+    'experience' => 'Experience',
+    'years_experience' => 'Years of Experience',
+    'projects_completed' => 'Projects Completed',
+    'happy_clients' => 'Happy Clients',
+    'technologies' => 'Technologies',
+    'latest_projects' => 'Latest Projects',
+    'view_all_projects' => 'View All Projects',
+]; 

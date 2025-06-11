@@ -2,7 +2,7 @@
     <footer class="border-t border-gray-800 py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <p class="text-gray-400">© {{ new Date().getFullYear() }} Web Developer Portfolio. Stworzone z ❤️ w Polsce.</p>
+                <p class="text-gray-400">© {{ new Date().getFullYear() }} Web Developer Portfolio • Szymon Niewiadomski</p>
             </div>
         </div>
     </footer>

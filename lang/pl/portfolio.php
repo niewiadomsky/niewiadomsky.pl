@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'Strona główna',
+    'about' => 'O mnie',
+    'projects' => 'Projekty',
+    'skills' => 'Umiejętności',
+    'contact' => 'Kontakt',
+    'portfolio' => 'Portfolio',
+    'welcome' => 'Witaj w moim portfolio',
+    'language_switched' => 'Język został pomyślnie zmieniony',
+    'view_project' => 'Zobacz projekt',
+    'download_cv' => 'Pobierz CV',
+    'get_in_touch' => 'Skontaktuj się',
+    'lets_work_together' => 'Pracujmy razem',
+    'my_name_is' => 'Nazywam się',
+    'iam_a' => 'Jestem',
+    'developer' => 'Programista',
+    'designer' => 'Projektant',
+    'freelancer' => 'Freelancer',
+    'experience' => 'Doświadczenie',
+    'years_experience' => 'Lat doświadczenia',
+    'projects_completed' => 'Ukończone projekty',
+    'happy_clients' => 'Zadowoleni klienci',
+    'technologies' => 'Technologie',
+    'latest_projects' => 'Najnowsze projekty',
+    'view_all_projects' => 'Zobacz wszystkie projekty',
+]; 
