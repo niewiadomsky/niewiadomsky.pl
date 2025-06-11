@@ -24,3 +24,6 @@ yarn-error.log
 /.zed
 /public/css/filament
 /public/js/filament
+**/caddy
+frankenphp
+frankenphp-worker.php
