@@ -1,9 +1,9 @@
 <template>
     <div class="min-h-screen bg-gray-900">
         <HeaderBadge />
-        <div class="flex justify-center py-4">
+        <!-- <div class="flex justify-center py-4">
             <LanguageSwitcher />
-        </div>
+        </div> -->
         <AboutSection />
         <HeroSection />
         <SkillsSection :skills="skills" />
@@ -27,8 +27,8 @@ import SkillsSection from '@/components/portfolio/SkillsSection.vue';
 import { Paginated, Project, Skill } from '@/types';
 
 const props = defineProps<{
-    skills: Paginated<Skill>;
-    projects: Paginated<Project>;
+    skills: Skill[];
+    projects: Project[];
 }>();
 </script>
 

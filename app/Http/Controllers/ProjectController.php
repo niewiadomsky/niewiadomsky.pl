@@ -22,7 +22,7 @@ class ProjectController extends Controller
         $project->load('media');
 
         return Inertia::render('projects/Project', [
-            'project' => new ProjectResource($project),
+            'project' => ProjectResource::make($project),
         ]);
     }
 } 

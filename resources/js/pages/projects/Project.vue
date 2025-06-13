@@ -12,18 +12,8 @@
 
         <!-- Project Content -->
         <div class="container mx-auto px-4 py-8">
-            <!-- Hero Section -->
-            <div class="animate-fade-in-up mb-12 text-center">
-                <h1 class="mb-6 text-4xl font-bold text-gray-900 md:text-6xl dark:text-white">
-                    {{ project.name }}
-                </h1>
-                <p class="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600 dark:text-gray-300">
-                    {{ project.description }}
-                </p>
-            </div>
-
             <!-- Project Images Gallery -->
-            <div class="animate-fade-in-up animation-delay-200 mb-12">
+            <div class="animate-fade-in-up mb-12">
                 <div class="overflow-hidden rounded-2xl bg-white shadow-xl dark:bg-gray-800">
                     <!-- Main Image -->
                     <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -72,7 +62,14 @@
             <div class="animate-fade-in-up animation-delay-400 mb-12 grid gap-8 md:grid-cols-2">
                 <!-- Project Info -->
                 <div class="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
-                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Informacje o projekcie</h2>
+                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">{{ project.name }}</h2>
+
+                    <!-- Project Description -->
+                    <div class="mb-6">
+                        <p class="leading-relaxed text-gray-600 dark:text-gray-300">
+                            {{ project.description }}
+                        </p>
+                    </div>
 
                     <!-- Technologies -->
                     <div v-if="project.technologies && project.technologies.length > 0" class="mb-6">

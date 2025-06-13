@@ -20,7 +20,7 @@ class ProjectResource extends JsonResource
             'description' => $this->description,
             'url' => $this->url,
             'github_url' => $this->github_url,
-            'images' => $this->getFirstMediaUrl('projects'),
+            'images' => $this->getMedia('projects')->map(fn ($media) => $media->getUrl()),
             'skills' => $this->whenLoaded('skills', function () {
                 return SkillResource::collection($this->skills);
             }),

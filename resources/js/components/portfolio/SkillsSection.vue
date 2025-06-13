@@ -18,16 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { Paginated, Skill } from '@/types';
+import { Skill } from '@/types';
 import { computed } from 'vue';
 import SkillCard from './SkillCard.vue';
 
 const props = defineProps<{
-    skills: Paginated<Skill>;
+    skills: Skill[];
 }>();
 
 const groupedSkills = computed(() => {
-    return props.skills.data.reduce((acc: Record<string, Skill[]>, skill) => {
+    return props.skills.reduce((acc: Record<string, Skill[]>, skill: Skill) => {
         acc[skill.category.id] = acc[skill.category.id] || [];
         acc[skill.category.id].push(skill);
         return acc;
