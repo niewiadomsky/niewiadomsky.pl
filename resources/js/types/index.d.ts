@@ -58,7 +58,8 @@ export interface Project {
     id: number;
     name: string;
     description: string | null;
-    url: string | null;
+    live_url: string | null;
+    iframe_url: string | null;
     order: number;
     images: string[];
     technologies?: string[];

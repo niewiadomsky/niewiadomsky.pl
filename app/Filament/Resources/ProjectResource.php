@@ -28,6 +28,13 @@ class ProjectResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('description'),
                 Forms\Components\TextInput::make('url'),
+                Forms\Components\TextInput::make('created_year')
+                    ->numeric()
+                    ->required(),
+                Forms\Components\Toggle::make('is_commercial')
+                    ->required(),
+                Forms\Components\Toggle::make('is_open_source')
+                    ->required(),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('projects')
                     ->multiple()
@@ -49,6 +56,12 @@ class ProjectResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('url')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('created_year')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_commercial')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('is_open_source')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('media_count')
                     ->counts('media')
                     ->sortable(),

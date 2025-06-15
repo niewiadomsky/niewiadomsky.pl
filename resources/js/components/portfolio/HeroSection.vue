@@ -168,7 +168,7 @@ const handleDrag = (event: MouseEvent | TouchEvent) => {
 
         if (!containerRef.value) return;
         const rect = containerRef.value.getBoundingClientRect();
-        const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+        const percentage = Math.max(22, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
         revealPercentage.value = percentage;
     });
 };

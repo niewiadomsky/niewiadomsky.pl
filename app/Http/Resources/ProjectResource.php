@@ -18,7 +18,8 @@ class ProjectResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'url' => $this->url,
+            'live_url' => $this->live_url,
+            'iframe_url' => $this->iframe_url,
             'github_url' => $this->github_url,
             'images' => $this->getMedia('projects')->map(fn ($media) => $media->getUrl()),
             'skills' => $this->whenLoaded('skills', function () {

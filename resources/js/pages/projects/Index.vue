@@ -65,7 +65,7 @@ import { Link } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 interface Props {
-    projects: Paginated<Project>;
+    projects: Project[];
 }
 
 const props = defineProps<Props>();
@@ -77,7 +77,7 @@ const selectedSkill = ref<string | null>(null);
 // Computed properties
 const allSkills = computed(() => {
     const skills = new Set<string>();
-    props.projects.data.forEach((project) => {
+    props.projects.forEach((project) => {
         if (project.skills) {
             project.skills.forEach((skill: Skill) => {
                 skills.add(skill.name);
@@ -88,7 +88,7 @@ const allSkills = computed(() => {
 });
 
 const filteredProjects = computed(() => {
-    let filtered = props.projects.data;
+    let filtered = props.projects;
 
     // Filter by search query
     if (searchQuery.value.trim()) {

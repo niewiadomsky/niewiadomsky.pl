@@ -14,7 +14,12 @@ class Project extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        'url',
+        'live_url',
+        'iframe_url',
+        'github_url',
+        'order',
+        'created_year',
+        'is_commercial',
     ];
 
     public function skills()

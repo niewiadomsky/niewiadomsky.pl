@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->integer('level');
             $table->foreignId('skill_category_id')->constrained('skill_categories');
             $table->string('description')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('hidden')->default(false);
+            $table->boolean('is_hidden')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

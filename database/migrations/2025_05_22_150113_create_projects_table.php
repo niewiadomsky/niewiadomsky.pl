@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('url')->nullable();
+            $table->string('live_url')->nullable();
             $table->string('github_url')->nullable();
+            $table->string('iframe_url')->nullable();
             $table->integer('order')->nullable();
+            $table->integer('created_year')->nullable();
+            $table->boolean('is_commercial')->default(false);
+            $table->boolean('is_open_source')->default(false);
+            $table->boolean('is_hidden')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

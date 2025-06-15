@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         $skills = Skill::with('media', 'category')->get();  
-        $projects = Project::with('media')->get();
+        $projects = Project::with('media', 'skills')->get();
 
         return Inertia::render('Home', [
             'skills' => SkillResource::collection($skills),

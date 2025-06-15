@@ -72,15 +72,33 @@
                     </div>
 
                     <!-- Technologies -->
-                    <div v-if="project.technologies && project.technologies.length > 0" class="mb-6">
-                        <h3 class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300">Technologie</h3>
+                    <div v-if="project.skills && project.skills.length > 0" class="mb-6">
+                        <h3 class="mb-4 text-lg font-semibold text-gray-700 dark:text-gray-300">
+                            <svg class="mr-2 inline h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Technologie i narzędzia
+                        </h3>
                         <div class="flex flex-wrap gap-2">
                             <span
-                                v-for="tech in project.technologies"
-                                :key="tech"
-                                class="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                                v-for="tech in project.skills"
+                                :key="tech.id"
+                                class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-3 py-1.5 text-sm font-medium text-gray-800 transition-all duration-200 hover:from-blue-200 hover:to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-blue-200 dark:hover:from-blue-800 dark:hover:to-purple-800"
                             >
-                                {{ tech }}
+                                <svg class="mr-1.5 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                {{ tech.name }}
                             </span>
                         </div>
                     </div>
@@ -99,8 +117,8 @@
                     <div class="space-y-4">
                         <!-- Live Demo Button -->
                         <a
-                            v-if="project.url"
-                            :href="project.url"
+                            v-if="project.live_url"
+                            :href="project.live_url"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-blue-700"
@@ -156,7 +174,7 @@
 <script setup lang="ts">
 import { Project } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 interface Props {
     project: Project;
@@ -172,6 +190,36 @@ onMounted(() => {
     if (props.project.images && props.project.images.length > 0) {
         selectedImage.value = props.project.images[0];
     }
+});
+
+// Computed properties for technology stats
+const averageSkillLevel = computed(() => {
+    if (!props.project.skills || props.project.skills.length === 0) return 0;
+    const total = props.project.skills.reduce((sum, skill) => sum + skill.level, 0);
+    return total / props.project.skills.length;
+});
+
+const topSkillCategory = computed(() => {
+    if (!props.project.skills || props.project.skills.length === 0) return 'N/A';
+
+    // Count skills by category
+    const categoryCount: Record<string, number> = {};
+    props.project.skills.forEach((skill) => {
+        const categoryName = skill.category?.name || 'Inne';
+        categoryCount[categoryName] = (categoryCount[categoryName] || 0) + 1;
+    });
+
+    // Find the category with the most skills
+    let maxCount = 0;
+    let topCategory = 'N/A';
+    Object.entries(categoryCount).forEach(([category, count]) => {
+        if (count > maxCount) {
+            maxCount = count;
+            topCategory = category;
+        }
+    });
+
+    return topCategory;
 });
 
 // Format date function

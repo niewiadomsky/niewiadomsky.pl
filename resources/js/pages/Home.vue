@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-900">
+    <div class="min-h-screen bg-gray-900 overflow-hidden">
         <HeaderBadge />
         <!-- <div class="flex justify-center py-4">
             <LanguageSwitcher />
