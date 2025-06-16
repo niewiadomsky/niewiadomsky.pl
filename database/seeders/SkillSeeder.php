@@ -54,7 +54,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'TypeScript',
                 'slug' => 'typescript',
-                'level' => 4,
+                'level' => 5,
                 'skill_category_id' => $languagesCategory->id,
             ],
             [
@@ -72,7 +72,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'SQL',
                 'slug' => 'sql',
-                'level' => 4,
+                'level' => 5,
                 'skill_category_id' => $languagesCategory->id,
             ],
             
@@ -89,24 +89,28 @@ class SkillSeeder extends Seeder
                 'level' => 4,
                 'image' => 'laravel-octane.svg',
                 'skill_category_id' => $frameworksCategory->id,
+                'is_hidden' => true,
             ],
             [
                 'name' => 'Laravel Horizon',
                 'slug' => 'laravel-horizon',
                 'level' => 4,
                 'skill_category_id' => $frameworksCategory->id,
+                'is_hidden' => true,
             ],
             [
                 'name' => 'Laravel Socialite',
                 'slug' => 'laravel-socialite',
                 'level' => 4,               
                 'skill_category_id' => $frameworksCategory->id,
+                'is_hidden' => true,
             ],
             [
                 'name' => 'Laravel Telescope',
                 'slug' => 'laravel-telescope',
                     'level' => 4,
                 'skill_category_id' => $frameworksCategory->id,
+                'is_hidden' => true,
             ],
             [
                 'name' => 'Vue.js',
@@ -129,7 +133,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'React.js',
                 'slug' => 'reactjs',
-                'level' => 4,
+                'level' => 3,
                 'skill_category_id' => $frameworksCategory->id,
             ],
             [
@@ -141,7 +145,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'Inertia',
                 'slug' => 'inertia',
-                'level' => 4,
+                'level' => 5,
                 'skill_category_id' => $frameworksCategory->id,
             ],
             [
@@ -173,7 +177,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'MySQL',
                 'slug' => 'mysql',
-                'level' => 4,
+                'level' => 5,
                 'skill_category_id' => $databasesCategory->id,
             ],
             [
@@ -193,25 +197,25 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'Git',
                 'slug' => 'git',
-                'level' => 5,
+                'level' => 4,
                 'skill_category_id' => $toolsCategory->id,
             ],
             [
                 'name' => 'Docker',
                 'slug' => 'docker',
-                'level' => 4,
+                'level' => 3,
                 'skill_category_id' => $toolsCategory->id,
             ],
             [
                 'name' => 'Cursor',
                 'slug' => 'cursor',
-                'level' => 4,
+                'level' => 3,
                 'skill_category_id' => $toolsCategory->id,
             ],
             [
                 'name' => 'n8n',
                 'slug' => 'n8n',
-                'level' => 3,
+                'level' => 4,
                 'skill_category_id' => $toolsCategory->id,
             ],
             [
@@ -235,7 +239,7 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'Jira',
                 'slug' => 'jira',
-                'level' => 3,
+                'level' => 4,
                 'skill_category_id' => $toolsCategory->id,
             ],
             [

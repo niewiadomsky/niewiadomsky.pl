@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $skills = Skill::with('media', 'category')->get();  
+        $skills = Skill::with('media', 'category')->where('is_hidden', false)->orderBy('level')->get();  
         $projects = Project::with('media', 'skills')->get();
 
         return Inertia::render('Home', [
