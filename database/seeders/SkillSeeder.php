@@ -255,7 +255,7 @@ class SkillSeeder extends Seeder
                 'is_hidden' => $skill['is_hidden'] ?? false,
                 'skill_category_id' => $skill['skill_category_id'],
             ]);
-            $skillModel->addMedia(storage_path("seeder/skills/{$skill['image']}.svg"))->preservingOriginal()->toMediaCollection('skills');
+            $skillModel->addMedia(storage_path("seeder/skills/{$skill['slug']}.svg"))->preservingOriginal()->toMediaCollection('skills');
         }
     }
 }
