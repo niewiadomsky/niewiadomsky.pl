@@ -9,7 +9,9 @@
             <!-- Rope attachment holes -->
             <div class="rope-hole rope-hole-left"></div>
             <div class="rope-hole rope-hole-right"></div>
-            <h2 class="neon-text relative z-10 text-center text-4xl leading-none font-extrabold tracking-tight text-green-400">#OPEN TO WORK</h2>
+            <h2 class="neon-text relative z-10 text-center text-4xl leading-none font-extrabold tracking-tight text-green-400">
+                {{ trans('portfolio.open_to_work') }}
+            </h2>
         </div>
     </div>
 </template>

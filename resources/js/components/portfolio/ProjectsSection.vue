@@ -4,14 +4,14 @@
             <h2
                 class="animate-gradient mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-4xl font-bold text-transparent text-white"
             >
-                Wybrane projekty
+                {{ trans('portfolio.selected_projects') }}
             </h2>
-            <p class="mb-2 text-lg text-gray-300">Poznaj moje najciekawsze realizacje i technologie, z których korzystam.</p>
+            <p class="mb-2 text-lg text-gray-300">{{ trans('portfolio.projects_description') }}</p>
             <div class="mx-auto h-1 w-16 animate-pulse rounded-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
         </div>
-            <TransitionGroup name="fade" tag="div" class="space-y-6">
-                <ProjectListItem v-for="project in projects" :key="project.id" :project="project" />
-            </TransitionGroup>
+        <TransitionGroup name="fade" tag="div" class="space-y-6">
+            <ProjectListItem v-for="project in projects" :key="project.id" :project="project" />
+        </TransitionGroup>
         <div class="mt-10 flex justify-center">
             <Link
                 :href="route('projects')"
@@ -20,7 +20,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L21 12m0 0l-3.75 5.25M21 12H3" />
                 </svg>
-                Zobacz wszystkie
+                {{ trans('portfolio.view_all') }}
             </Link>
         </div>
     </section>
@@ -28,8 +28,8 @@
 
 <script setup lang="ts">
 import { Project } from '@/types';
+
 import { Link } from '@inertiajs/vue3';
-import { TransitionGroup } from 'vue';
 import ProjectListItem from './ProjectListItem.vue';
 
 defineProps<{

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "538d9c1d000e70315589bb536ae25149",
+    "content-hash": "f9f6eddd93d8838f4682a7819819e392",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -431,6 +431,63 @@
                 }
             ],
             "time": "2024-09-19T14:15:21+00:00"
+        },
+        {
+            "name": "cyberwolfstudio/lingua",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cyberwolf-studio/lingua.git",
+                "reference": "e1fa1e2c6a8fd58b3555efb7a09ad8257a7fe98d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cyberwolf-studio/lingua/zipball/e1fa1e2c6a8fd58b3555efb7a09ad8257a7fe98d",
+                "reference": "e1fa1e2c6a8fd58b3555efb7a09ad8257a7fe98d",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/pest-plugin-testbench": "^2.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CyberWolfStudio\\Lingua\\LinguaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CyberWolfStudio\\Lingua\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "secondman",
+                    "email": "secondman@jetstreamlabs.com"
+                },
+                {
+                    "name": "cyberwolfstudio",
+                    "email": "hello@cyberwolfstudio.com"
+                }
+            ],
+            "description": "Add your Laravel language translations to your asset pipeline for use in Javascript packages like Vue or React.",
+            "support": {
+                "issues": "https://github.com/cyberwolf-studio/lingua/issues",
+                "source": "https://github.com/cyberwolf-studio/lingua/tree/v1.0.4"
+            },
+            "time": "2025-06-08T22:44:45+00:00"
         },
         {
             "name": "danharrin/date-format-converter",

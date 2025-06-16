@@ -126,5 +126,10 @@ return [
     'admin' => [
         'email' => env('DEFAULT_ADMIN_EMAIL', 'admin@example.com'),
         'password' => env('DEFAULT_ADMIN_PASSWORD', 'password'),
-    ]
+    ],
+
+    'umami' => [
+        'script_url' => env('UMAMI_SCRIPT_URL'),
+        'website_id' => env('UMAMI_WEBSITE_ID'),
+    ],
 ];

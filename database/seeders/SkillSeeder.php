@@ -14,27 +14,27 @@ class SkillSeeder extends Seeder
     public function run(): void
     {
         $languagesCategory = SkillCategory::create([
-            'name' => 'Języki programowania',
+            'name' => ['pl' => 'Języki programowania', 'en' => 'Programming Languages'],
             'order' => 1,
         ]);
 
         $frameworksCategory = SkillCategory::create([
-            'name' => 'Frameworki / Biblioteki',
+            'name' => ['pl' => 'Frameworki / Biblioteki', 'en' => 'Frameworks / Libraries'],
             'order' => 2,
         ]);
 
         $databasesCategory = SkillCategory::create([
-            'name' => 'Bazy danych',
+            'name' => ['pl' => 'Bazy danych', 'en' => 'Databases'],
             'order' => 3,
         ]);
 
         $toolsCategory = SkillCategory::create([
-            'name' => 'Narzędzia',
+            'name' => ['pl' => 'Narzędzia', 'en' => 'Tools'],
             'order' => 4,
         ]);
         
         $otherCategory = SkillCategory::create([
-            'name' => 'Inne',
+            'name' => ['pl' => 'Inne', 'en' => 'Other'],
             'order' => 5,
         ]);
 

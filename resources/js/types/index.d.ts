@@ -76,3 +76,20 @@ export interface Paginated<T> {
         last: string;
     };
 }
+
+export interface Experience {
+    id: number;
+    position: string;
+    company: string;
+    location: string;
+    started_at: string;
+    ended_at: string | null;
+    entries: ExperienceEntry[];
+    technologies?: string[];
+}
+
+export interface ExperienceEntry {
+    id: number;
+    description: string;
+    order: number;
+}

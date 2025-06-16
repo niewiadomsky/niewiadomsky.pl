@@ -1,12 +1,15 @@
 <template>
+    <Head>
+        <title>{{ project.name }}</title>
+    </Head>
     <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 transition-all duration-300 dark:from-gray-900 dark:to-gray-800">
         <!-- Back Button -->
         <div class="container mx-auto px-4 pt-8">
-            <Link href="/#projekty" class="back-button">
+            <Link href="/#projekty" class="back-button" data-umami-event="Click into Back to All Projects on the top">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
-                Powrót do projektów
+                {{ trans('portfolio.back_to_projects') }}
             </Link>
         </div>
 
@@ -32,7 +35,7 @@
                                         clip-rule="evenodd"
                                     />
                                 </svg>
-                                <p class="text-sm">Brak obrazu</p>
+                                <p class="text-sm">{{ trans('portfolio.no_image') }}</p>
                             </div>
                         </div>
                     </div>
@@ -83,7 +86,7 @@
                                 />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            Technologie i narzędzia
+                            {{ trans('portfolio.technologies_and_tools') }}
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             <span
@@ -105,14 +108,14 @@
 
                     <!-- Creation Date -->
                     <div v-if="project.created_at" class="mb-6">
-                        <h3 class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">Data utworzenia</h3>
+                        <h3 class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">{{ trans('portfolio.creation_date') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400">{{ formatDate(project.created_at) }}</p>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
-                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Akcje</h2>
+                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">{{ trans('portfolio.actions') }}</h2>
 
                     <div class="space-y-4">
                         <!-- Live Demo Button -->
@@ -122,6 +125,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-blue-700"
+                            data-umami-event="Click into Live Demo"
                         >
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -131,7 +135,7 @@
                                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                                 />
                             </svg>
-                            Zobacz na żywo
+                            {{ trans('portfolio.view_live') }}
                         </a>
 
                         <!-- GitHub Button -->
@@ -141,6 +145,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-800 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600"
+                            data-umami-event="Click into GitHub"
                         >
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path
@@ -149,7 +154,7 @@
                                     clip-rule="evenodd"
                                 />
                             </svg>
-                            Zobacz kod źródłowy
+                            {{ trans('portfolio.view_source_code') }}
                         </a>
                     </div>
                 </div>
@@ -160,11 +165,12 @@
                 <Link
                     href="/#projekty"
                     class="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
+                    data-umami-event="Click into Back to All Projects on the bottom"
                 >
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m0 0l4-4m-4 4l4 4" />
                     </svg>
-                    Powrót do wszystkich projektów
+                    {{ trans('portfolio.back_to_all_projects') }}
                 </Link>
             </div>
         </div>
@@ -173,7 +179,7 @@
 
 <script setup lang="ts">
 import { Project } from '@/types';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 
 interface Props {
@@ -190,36 +196,6 @@ onMounted(() => {
     if (props.project.images && props.project.images.length > 0) {
         selectedImage.value = props.project.images[0];
     }
-});
-
-// Computed properties for technology stats
-const averageSkillLevel = computed(() => {
-    if (!props.project.skills || props.project.skills.length === 0) return 0;
-    const total = props.project.skills.reduce((sum, skill) => sum + skill.level, 0);
-    return total / props.project.skills.length;
-});
-
-const topSkillCategory = computed(() => {
-    if (!props.project.skills || props.project.skills.length === 0) return 'N/A';
-
-    // Count skills by category
-    const categoryCount: Record<string, number> = {};
-    props.project.skills.forEach((skill) => {
-        const categoryName = skill.category?.name || 'Inne';
-        categoryCount[categoryName] = (categoryCount[categoryName] || 0) + 1;
-    });
-
-    // Find the category with the most skills
-    let maxCount = 0;
-    let topCategory = 'N/A';
-    Object.entries(categoryCount).forEach(([category, count]) => {
-        if (count > maxCount) {
-            maxCount = count;
-            topCategory = category;
-        }
-    });
-
-    return topCategory;
 });
 
 // Format date function

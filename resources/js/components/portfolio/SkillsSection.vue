@@ -1,7 +1,7 @@
 <template>
     <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
-            <h2 class="mb-4 text-4xl font-bold text-white">Umiejętności techniczne</h2>
+            <h2 class="mb-4 text-4xl font-bold text-white">{{ trans('portfolio.technical_skills') }}</h2>
             <div class="mx-auto h-1 w-16 rounded-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
         </div>
         <div class="space-y-12">
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { Skill } from '@/types';
+
 import { computed } from 'vue';
 import SkillCard from './SkillCard.vue';
 

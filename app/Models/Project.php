@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Project extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia;
+    use SoftDeletes, InteractsWithMedia, HasTranslations;
+
+    public array $translatable = ['name', 'description'];
 
     protected $fillable = [
         'name',
@@ -20,6 +23,11 @@ class Project extends Model implements HasMedia
         'order',
         'created_year',
         'is_commercial',
+    ];
+
+    protected $casts = [
+        'name' => 'array',
+        'description' => 'array',
     ];
 
     public function skills()

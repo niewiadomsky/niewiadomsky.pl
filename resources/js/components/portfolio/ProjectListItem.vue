@@ -35,7 +35,7 @@
                 <!-- Project Status Badge -->
                 <div class="absolute top-2 right-2">
                     <span :class="statusBadgeClass" class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium">
-                        {{ projectStatus }}
+                        {{ projectStatusText }}
                     </span>
                 </div>
             </div>
@@ -49,12 +49,6 @@
                     </h3>
                     <div class="flex items-center gap-4 text-sm text-gray-400">
                         <span v-if="project.created_at">{{ formatDate(project.created_at) }}</span>
-                        <span v-if="project.skills && project.skills.length > 0" class="flex items-center gap-1">
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                            {{ project.skills.length }} technologies
-                        </span>
                     </div>
                 </div>
 
@@ -79,16 +73,8 @@
                         @click="showAllSkills = true"
                         class="inline-flex items-center rounded-full bg-gray-700/50 px-3 py-1 text-sm font-medium text-gray-400 ring-1 ring-gray-600/50 transition-all duration-300 hover:bg-gray-700 hover:text-gray-300"
                     >
-                        +{{ project.skills.length - 5 }} more
+                        {{ trans('portfolio.more_skills', { count: project.skills.length - 5 }) }}
                     </button>
-                </div>
-
-                <!-- Achievement Metrics (if available) -->
-                <div v-if="(project as any).metrics" class="flex flex-wrap gap-4 text-sm">
-                    <div v-for="metric in (project as any).metrics" :key="metric.label" class="flex items-center gap-1 text-gray-400">
-                        <span class="font-semibold text-white">{{ metric.value }}</span>
-                        <span>{{ metric.label }}</span>
-                    </div>
                 </div>
             </div>
 
@@ -98,8 +84,8 @@
                 <Link
                     :href="route('project.show', project.id)"
                     class="group/btn inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/25 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-                    aria-label="View project details"
-                    @click="trackAction('view_details')"
+                    :aria-label="trans('portfolio.view_project_details')"
+                    data-umami-event="Click into Project Details"
                 >
                     <svg
                         class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110"
@@ -125,8 +111,8 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         class="group/btn inline-flex items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-                        aria-label="Zobacz live demo"
-                        @click="trackAction('view_demo')"
+                        :aria-label="trans('portfolio.view_live_demo')"
+                        data-umami-event="Click into Live Demo"
                     >
                         <svg
                             class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110"
@@ -148,8 +134,8 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         class="group/btn inline-flex items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-                        aria-label="Zobacz kod na GitHub"
-                        @click="trackAction('view_github')"
+                        :aria-label="trans('portfolio.view_source_code_gh')"
+                        data-umami-event="Click into GitHub"
                     >
                         <svg class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24" fill="currentColor">
                             <path
@@ -170,8 +156,12 @@
 
 <script setup lang="ts">
 import { Project } from '@/types';
+
 import { Link } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
+import { inject } from 'vue';
+
+const trans = inject('trans') as (key: string, replacements?: Record<string, string | number>) => string;
 
 interface Props {
     project: Project;
@@ -188,9 +178,13 @@ const imageError = ref(false);
 // Computed properties
 const projectStatus = computed(() => {
     // You can extend this logic based on your project model
-    if (props.project.live_url) return 'Live';
-    if (props.project.github_url) return 'Open Source';
-    return 'Completed';
+    if (props.project.live_url) return 'live';
+    if (props.project.github_url) return 'open_source';
+    return 'completed';
+});
+
+const projectStatusText = computed(() => {
+    return trans(`portfolio.status_${projectStatus.value}`);
 });
 
 const statusBadgeClass = computed(() => {
@@ -198,9 +192,9 @@ const statusBadgeClass = computed(() => {
     const baseClasses = 'backdrop-blur-sm';
 
     switch (status) {
-        case 'Live':
+        case 'live':
             return `${baseClasses} bg-green-500/20 text-green-300 ring-1 ring-green-500/30`;
-        case 'Open Source':
+        case 'open_source':
             return `${baseClasses} bg-blue-500/20 text-blue-300 ring-1 ring-blue-500/30`;
         default:
             return `${baseClasses} bg-gray-500/20 text-gray-300 ring-1 ring-gray-500/30`;
@@ -230,12 +224,6 @@ const formatDate = (dateString: string) => {
         year: 'numeric',
         month: 'long',
     });
-};
-
-const trackAction = (action: string) => {
-    // Analytics tracking - implement based on your analytics solution
-    console.log(`Portfolio action: ${action} on project ${props.project.id}`);
-    // Example: gtag('event', action, { project_id: props.project.id });
 };
 </script>
 

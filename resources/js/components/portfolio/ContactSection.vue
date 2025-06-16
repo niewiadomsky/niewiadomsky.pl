@@ -1,16 +1,17 @@
 <template>
     <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div class="mb-16 text-center">
-            <h2 class="mb-4 text-4xl font-bold text-white">Skontaktuj się ze&nbsp;mną</h2>
+            <h2 class="mb-4 text-4xl font-bold text-white" v-html="trans('portfolio.contact_me')"></h2>
             <div class="mx-auto h-1 w-16 rounded-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
         </div>
         <div class="mx-auto max-w-2xl">
-            <p class="mb-10 text-center text-lg text-gray-300">Masz projekt w głowie? Chcesz porozmawiać o współpracy? Napisz do mnie!</p>
+            <p class="mb-10 text-center text-lg text-gray-300">{{ trans('portfolio.contact_prompt') }}</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a
                     href="mailto:niewiadomski.szymon@gmail.com"
                     class="group flex items-center space-x-2 rounded-xl border border-gray-700/50 bg-gray-800/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-600/50 hover:bg-gray-800/70"
-                >
+                    data-umami-event="Click into Email"
+                    >
                     <div class="rounded-lg bg-gray-700/50 p-2 transition-colors duration-300 group-hover:bg-blue-600">
                         <svg class="h-4 w-4 text-gray-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -21,12 +22,13 @@
                             />
                         </svg>
                     </div>
-                    <span class="font-medium text-gray-300 group-hover:text-white">Email</span>
+                    <span class="font-medium text-gray-300 group-hover:text-white">{{ trans('portfolio.email') }}</span>
                 </a>
                 <a
                     href="https://github.com/niewiadomsky"
                     target="_blank"
                     class="group flex items-center space-x-2 rounded-xl border border-gray-700/50 bg-gray-800/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-600/50 hover:bg-gray-800/70"
+                    data-umami-event="Click into GitHub"
                 >
                     <div class="rounded-lg bg-gray-700/50 p-2 transition-colors duration-300 group-hover:bg-purple-600">
                         <svg class="h-4 w-4 text-gray-300 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -35,12 +37,13 @@
                             />
                         </svg>
                     </div>
-                    <span class="font-medium text-gray-300 group-hover:text-white">GitHub</span>
+                    <span class="font-medium text-gray-300 group-hover:text-white">{{ trans('portfolio.github') }}</span>
                 </a>
                 <a
                     href="https://linkedin.com/in/niewiadomsky"
                     target="_blank"
                     class="group flex items-center space-x-2 rounded-xl border border-gray-700/50 bg-gray-800/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-600/50 hover:bg-gray-800/70"
+                    data-umami-event="Click into LinkedIn"
                 >
                     <div class="rounded-lg bg-gray-700/50 p-2 transition-colors duration-300 group-hover:bg-blue-600">
                         <svg class="h-4 w-4 text-gray-300 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -49,13 +52,11 @@
                             />
                         </svg>
                     </div>
-                    <span class="font-medium text-gray-300 group-hover:text-white">LinkedIn</span>
+                    <span class="font-medium text-gray-300 group-hover:text-white">{{ trans('portfolio.linkedin') }}</span>
                 </a>
             </div>
         </div>
     </section>
 </template>
 
-<script setup lang="ts">
-// No props needed for this static section
-</script>
+<script setup lang="ts"></script>

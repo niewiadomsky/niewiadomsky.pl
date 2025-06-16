@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->integer('level');
             $table->foreignId('skill_category_id')->constrained('skill_categories');
-            $table->string('description')->nullable();
+            $table->json('description')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('is_hidden')->default(false);
             $table->softDeletes();

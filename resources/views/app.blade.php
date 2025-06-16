@@ -42,6 +42,10 @@
         @routes
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         @inertiaHead
+        
+        @if(config('app.umami.script_url') && config('app.umami.website_id'))
+            <script defer src="{{ config('app.umami.script_url') }}" data-website-id="{{ config('app.umami.website_id') }}"></script>
+        @endif
     </head>
     <body class="font-sans antialiased">
         @inertia

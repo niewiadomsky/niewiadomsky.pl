@@ -2,12 +2,12 @@
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div ref="containerRef" class="relative h-48 overflow-hidden rounded-lg md:h-96">
             <!-- Bottom image (background) -->
-            <img :src="HorseImage" alt="Hero Background" class="absolute top-0 left-0 h-full w-full object-cover" />
+            <img :src="HorseImage" :alt="trans('portfolio.hero_background')" class="absolute top-0 left-0 h-full w-full object-cover" />
 
             <!-- Top image (foreground) -->
             <img
                 :src="HomeImage"
-                alt="Hero Foreground"
+                :alt="trans('portfolio.hero_foreground')"
                 class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-75 ease-out"
                 :style="{ clipPath: clipPathValue }"
             />
@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import HomeImage from '@/../assets/images/home.webp';
 import HorseImage from '@/../assets/images/horses.webp';
+
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const rotation = 35; // degrees
@@ -130,6 +131,10 @@ const handleDrag = (event: MouseEvent | TouchEvent) => {
     if (event.cancelable) {
         event.preventDefault();
     }
+
+    window.umami?.track('Drag the line', {
+        percentage: revealPercentage.value,
+    });
 
     // Get clientX from mouse or touch event
     const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;

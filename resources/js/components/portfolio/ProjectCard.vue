@@ -22,7 +22,7 @@
                         :href="route('project.show', project.id)"
                         class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl"
                     >
-                        <span>Zobacz szczegóły</span>
+                        <span>{{ trans('portfolio.view_details') }}</span>
                         <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
@@ -33,7 +33,7 @@
                         target="_blank"
                         class="inline-flex items-center rounded-full border border-gray-600/50 bg-gray-700/50 px-4 py-2 font-medium text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700"
                     >
-                        <span>Live demo</span>
+                        <span>{{ trans('portfolio.live_demo') }}</span>
                         <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
                                 stroke-linecap="round"
@@ -51,6 +51,7 @@
 
 <script setup lang="ts">
 import { Project } from '@/types';
+
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
