@@ -21,7 +21,6 @@
                     transformOrigin: 'center center',
                 }"
                 @mousedown="startDrag"
-                @touchstart.passive="false"
                 @touchstart.prevent="startDrag"
             >
                 <!-- Larger touch area for mobile -->
@@ -34,22 +33,9 @@
                 <div
                     class="absolute top-0 -right-4 bottom-0 -left-4 touch-none md:-right-2 md:-left-2"
                     @mousedown="startDrag"
-                    @touchstart.passive="false"
                     @touchstart.prevent="startDrag"
                 ></div>
             </div>
-
-            <!-- Drag overlay for better UX -->
-            <div
-                v-if="isDragging"
-                class="fixed inset-0 z-20 cursor-ew-resize touch-none"
-                @mousemove="handleDrag"
-                @mouseup="stopDrag"
-                @touchmove.passive="false"
-                @touchmove.prevent="handleDrag"
-                @touchend="stopDrag"
-                @touchcancel="stopDrag"
-            ></div>
         </div>
     </section>
 </template>
@@ -71,18 +57,22 @@ const updateAspectRatio = () => {
     if (containerRef.value) {
         const rect = containerRef.value.getBoundingClientRect();
         aspectRatio.value = rect.width / rect.height;
+        if (rect.width > 600) {
+            revealPercentage.value = 58;
+        } else {
+            revealPercentage.value = 62;
+        }
     }
 };
 onMounted(() => {
     updateAspectRatio();
     window.addEventListener('resize', updateAspectRatio);
-    document.addEventListener('mouseup', stopDrag);
-    document.addEventListener('touchend', stopDrag);
+    // Cleanup listeners on unmount
 });
 onUnmounted(() => {
     window.removeEventListener('resize', updateAspectRatio);
-    document.removeEventListener('mouseup', stopDrag);
-    document.removeEventListener('touchend', stopDrag);
+    // Ensure any lingering drag listeners are removed
+    stopDrag();
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
     }
@@ -123,63 +113,60 @@ const linePosition = computed(() => {
 // Drag handling
 const startDrag = (event: MouseEvent | TouchEvent) => {
     isDragging.value = true;
+    // Prevent text selection and other default behaviors
+    event.preventDefault();
 
-    // Prevent default behaviors
-    if (event.cancelable) {
-        event.preventDefault();
-    }
-
-    // For touch events, prevent page scrolling and zooming
-    if (event instanceof TouchEvent) {
-        document.body.style.overflow = 'hidden';
-        document.body.style.touchAction = 'none';
-        // Prevent page zoom on double tap
-        document.body.style.userSelect = 'none';
-    }
+    // Add listeners to the window to capture dragging anywhere on the page
+    window.addEventListener('mousemove', handleDrag);
+    window.addEventListener('touchmove', handleDrag, { passive: false }); // passive: false to allow preventDefault
+    window.addEventListener('mouseup', stopDrag);
+    window.addEventListener('touchend', stopDrag);
 };
 
 const handleDrag = (event: MouseEvent | TouchEvent) => {
     if (!isDragging.value || !containerRef.value) return;
 
-    // Prevent default behaviors
+    // Prevent page scrolling during drag on touch devices
     if (event.cancelable) {
         event.preventDefault();
     }
+
+    // Get clientX from mouse or touch event
+    const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
 
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
     }
 
     animationFrameId = requestAnimationFrame(() => {
-        let clientX: number;
-
-        if (event instanceof MouseEvent) {
-            clientX = event.clientX;
-        } else {
-            // Handle touch events - get the most recent touch point
-            if (event.touches && event.touches.length > 0) {
-                clientX = event.touches[0].clientX;
-            } else if (event.changedTouches && event.changedTouches.length > 0) {
-                clientX = event.changedTouches[0].clientX;
-            } else {
-                return;
-            }
-        }
-
         if (!containerRef.value) return;
         const rect = containerRef.value.getBoundingClientRect();
-        const percentage = Math.max(22, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-        revealPercentage.value = percentage;
+        const cursorPercentage = ((clientX - rect.left) / rect.width) * 100;
+
+        // To keep the line under the cursor, we must solve for revealPercentage:
+        // linePosition = revealPercentage - diagonalOffset / 2
+        // We want linePosition to be at cursorPercentage, so:
+        // cursorPercentage = revealPercentage - diagonalOffset / 2
+        // revealPercentage = cursorPercentage + diagonalOffset / 2
+        const newRevealPercentage = cursorPercentage + diagonalOffset.value / 2;
+
+        // Clamp the revealPercentage to keep the clip-path within bounds (0% to 100%)
+        // and ensure the line doesn't go off-screen.
+        const minReveal = diagonalOffset.value; // Ensures bottom point is >= 0
+        const maxReveal = 100; // Ensures top point is <= 100
+        revealPercentage.value = Math.max(minReveal, Math.min(maxReveal, newRevealPercentage));
     });
 };
 
 const stopDrag = () => {
+    if (!isDragging.value) return; // Prevent running if not dragging
     isDragging.value = false;
 
-    // Re-enable normal touch behaviors
-    document.body.style.overflow = '';
-    document.body.style.touchAction = '';
-    document.body.style.userSelect = '';
+    // Remove the global listeners
+    window.removeEventListener('mousemove', handleDrag);
+    window.removeEventListener('touchmove', handleDrag);
+    window.removeEventListener('mouseup', stopDrag);
+    window.removeEventListener('touchend', stopDrag);
 
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
