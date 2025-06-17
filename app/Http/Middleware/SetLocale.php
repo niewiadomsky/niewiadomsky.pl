@@ -16,16 +16,9 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = session('locale', $request->header('Accept-Language', 'en'));
-
-        $splitLocale = explode(',', $locale);
-        $firstLocale = trim($splitLocale[0]);
+        $locale = session('locale', 'en');
         
-        if (!in_array($firstLocale, ['en', 'pl'])) {
-            $locale = 'en';
-        }
-        
-        App::setLocale($firstLocale);
+        App::setLocale($locale);
         
         return $next($request);
     }
