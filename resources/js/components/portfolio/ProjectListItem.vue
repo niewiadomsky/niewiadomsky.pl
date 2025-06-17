@@ -47,7 +47,7 @@
                         </span>
                     </div>
                     <div class="flex items-center gap-4 text-sm text-gray-400">
-                        <span v-if="project.created_at">{{ formatDate(project.created_at) }}</span>
+                        <span v-if="project.created_year">{{ project.created_year }}</span>
                     </div>
                 </div>
 
@@ -84,7 +84,6 @@
                     :href="route('project.show', project.id)"
                     class="group/btn inline-flex flex-1 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/25 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
                     :aria-label="trans('portfolio.view_project_details')"
-                    data-umami-event="Click into Project Details"
                 >
                     <svg
                         class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110"
@@ -213,13 +212,6 @@ const handleImageError = () => {
 
 const handleImageLoad = () => {
     isLoading.value = false;
-};
-
-const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pl-PL', {
-        year: 'numeric',
-        month: 'long',
-    });
 };
 </script>
 

@@ -3,8 +3,12 @@
         <title>{{ trans('portfolio.my_projects') }}</title>
     </Head>
     <div class="min-h-screen bg-gray-900">
+        
         <!-- Header Section -->
         <div class="bg-gradient-to-b from-gray-800 to-gray-900 py-16">
+            <div class="flex justify-center py-4">
+                <LanguageSwitcher />
+            </div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h1 class="mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
@@ -15,6 +19,7 @@
                     </p>
                 </div>
             </div>
+            
         </div>
 
         <div class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
@@ -62,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import LanguageSwitcher from '@/components/portfolio/LanguageSwitcher.vue';
 import ProjectListItem from '@/components/portfolio/ProjectListItem.vue';
 import { Project, Skill } from '@/types';
 

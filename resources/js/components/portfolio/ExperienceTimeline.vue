@@ -57,8 +57,8 @@
 <script setup lang="ts">
 import { Experience } from '@/types';
 import { inject } from 'vue';
-
 import { usePage } from '@inertiajs/vue3';
+import { format } from 'date-fns';
 
 defineProps<{
     experiences: Experience[];
@@ -69,12 +69,10 @@ const locale = (pageProps as any).locale || 'en';
 const trans = inject('trans') as (key: string) => string;
 
 const formatPeriod = (experience: Experience) => {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
-    const localeString = locale === 'pl' ? 'pl-PL' : 'en-US';
-    const startFormatted = new Date(experience.started_at).toLocaleDateString(localeString, options);
+    const startFormatted = format(new Date(experience.started_at), 'MM.yyyy');
 
     if (experience.ended_at) {
-        const endFormatted = new Date(experience.ended_at).toLocaleDateString(localeString, options);
+        const endFormatted = format(new Date(experience.ended_at), 'MM.yyyy');
         return `${startFormatted} - ${endFormatted}`;
     }
 

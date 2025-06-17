@@ -3,9 +3,12 @@
         <title>{{ project.name }}</title>
     </Head>
     <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 transition-all duration-300 dark:from-gray-900 dark:to-gray-800">
+        <div class="flex justify-center py-4">
+            <LanguageSwitcher />
+        </div>
         <!-- Back Button -->
         <div class="container mx-auto px-4 pt-8">
-            <Link href="/#projekty" class="back-button" data-umami-event="Click into Back to All Projects on the top">
+            <Link href="/#projekty" class="back-button">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -65,7 +68,12 @@
             <div class="animate-fade-in-up animation-delay-400 mb-12 grid gap-8 md:grid-cols-2">
                 <!-- Project Info -->
                 <div class="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
-                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">{{ project.name }}</h2>
+                    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+                        {{ project.name }}
+                        <span v-if="project.created_year" class="ml-2 text-lg font-normal text-green-500 dark:text-green-400">{{
+                            project.created_year
+                        }}</span>
+                    </h2>
 
                     <!-- Project Description -->
                     <div class="mb-6">
@@ -104,12 +112,6 @@
                                 {{ tech.name }}
                             </span>
                         </div>
-                    </div>
-
-                    <!-- Creation Date -->
-                    <div v-if="project.created_at" class="mb-6">
-                        <h3 class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">{{ trans('portfolio.creation_date') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400">{{ formatDate(project.created_at) }}</p>
                     </div>
                 </div>
 
@@ -165,7 +167,6 @@
                 <Link
                     href="/#projekty"
                     class="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
-                    data-umami-event="Click into Back to All Projects on the bottom"
                 >
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m0 0l4-4m-4 4l4 4" />
@@ -178,9 +179,10 @@
 </template>
 
 <script setup lang="ts">
+import LanguageSwitcher from '@/components/portfolio/LanguageSwitcher.vue';
 import { Project } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 interface Props {
     project: Project;
@@ -197,16 +199,6 @@ onMounted(() => {
         selectedImage.value = props.project.images[0];
     }
 });
-
-// Format date function
-const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pl-PL', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-};
 </script>
 
 <style scoped>
