@@ -8,7 +8,7 @@
         <script>
             (function() {
                 const appearance = '{{ $appearance ?? "system" }}';
-
+her
                 if (appearance === 'system') {
                     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 

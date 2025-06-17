@@ -25,9 +25,9 @@
             >
                 <!-- Larger touch area for mobile -->
                 <div
-                    class="absolute top-1/2 left-1/2 flex h-16 w-8 -translate-x-1/2 -translate-y-1/2 transform touch-none items-center justify-center rounded-full bg-white/80 shadow-sm transition-transform duration-75 hover:scale-110 active:scale-110 md:h-12 md:w-6"
+                    class="absolute top-1/2 left-1/2 flex h-12 w-6 -translate-x-1/2 -translate-y-1/2 transform touch-none items-center justify-center rounded-full bg-white/80 shadow-sm transition-transform duration-75 hover:scale-110 active:scale-110 md:h-12 md:w-6"
                 >
-                    <div class="h-8 w-0.5 rounded-full bg-gray-500 md:h-6"></div>
+                    <div class="h-6 w-0.5 rounded-full bg-gray-500 md:h-6"></div>
                 </div>
                 <!-- Extended touch area for easier mobile interaction -->
                 <div

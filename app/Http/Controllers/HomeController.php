@@ -25,7 +25,7 @@ class HomeController extends Controller
             'skills' => SkillResource::collection($skills),
             'projects' => ProjectResource::collection($projects),
             'experiences' => ExperienceResource::collection($experiences),
-            'resume' => ResumeResource::make($resume),
+            'resume' => $resume ? ResumeResource::make($resume) : null,
         ]);
     }
 }
