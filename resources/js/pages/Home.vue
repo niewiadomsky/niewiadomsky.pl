@@ -9,12 +9,12 @@
         <div class="flex justify-center py-4">
             <LanguageSwitcher />
         </div>
-        <AboutSection />
+        <AboutSection :resume="resume" />
         <HeroSection />
         <SkillsSection :skills="skills" />
         <ProjectsSection :projects="projects" />
         <ExperienceTimeline :experiences="experiences" />
-        <ContactSection />
+        <ContactSection :resume="resume" />
         <FooterSection />
     </div>
 </template>
@@ -29,13 +29,14 @@ import HeroSection from '@/components/portfolio/HeroSection.vue';
 import LanguageSwitcher from '@/components/portfolio/LanguageSwitcher.vue';
 import ProjectsSection from '@/components/portfolio/ProjectsSection.vue';
 import SkillsSection from '@/components/portfolio/SkillsSection.vue';
-import { Experience, Paginated, Project, Skill } from '@/types';
+import { Experience, Paginated, Project, Resume, Skill } from '@/types';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps<{
     skills: Skill[];
     projects: Project[];
     experiences: Experience[];
+    resume: Resume | undefined;
 }>();
 </script>
 

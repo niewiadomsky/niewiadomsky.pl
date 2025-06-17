@@ -19,6 +19,7 @@ return [
     'designer' => 'Designer',
     'freelancer' => 'Freelancer',
     'experience' => 'Experience',
+    'experience_description' => 'My professional journey and work experience in the tech industry.',
     'years_experience' => 'Years of Experience',
     'projects_completed' => 'Projects Completed',
     'happy_clients' => 'Happy Clients',

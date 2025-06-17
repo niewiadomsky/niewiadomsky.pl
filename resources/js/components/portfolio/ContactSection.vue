@@ -11,7 +11,7 @@
                     href="mailto:niewiadomski.szymon@gmail.com"
                     class="group flex items-center space-x-2 rounded-xl border border-gray-700/50 bg-gray-800/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-600/50 hover:bg-gray-800/70"
                     data-umami-event="Click into Email"
-                    >
+                >
                     <div class="rounded-lg bg-gray-700/50 p-2 transition-colors duration-300 group-hover:bg-blue-600">
                         <svg class="h-4 w-4 text-gray-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
@@ -56,7 +56,17 @@
                 </a>
             </div>
         </div>
+        <div class="flex justify-center">
+            <ResumeButton :resume="resume" class="mt-8" />
+        </div>
     </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ResumeButton from '@/components/portfolio/ResumeButton.vue';
+import { Resume } from '@/types';
+
+const props = defineProps<{
+    resume: Resume | undefined;
+}>();
+</script>

@@ -9,8 +9,8 @@
 
         <div class="flex flex-col gap-6 p-6 sm:flex-row sm:items-start">
             <!-- Project Image with Fallback -->
-            <div class="relative flex-shrink-0 overflow-hidden rounded-xl">
-                <div class="h-32 w-56 bg-gradient-to-br from-gray-700 to-gray-800">
+            <div class="relative w-full flex-shrink-0 overflow-hidden rounded-xl sm:w-56">
+                <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-800 sm:h-32">
                     <img
                         v-if="project.images && project.images.length > 0"
                         :src="project.images[0]"
@@ -32,21 +32,20 @@
                         </svg>
                     </div>
                 </div>
-                <!-- Project Status Badge -->
-                <div class="absolute top-2 right-2">
-                    <span :class="statusBadgeClass" class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium">
-                        {{ projectStatusText }}
-                    </span>
-                </div>
             </div>
 
             <!-- Project Info -->
             <div class="min-w-0 flex-1 space-y-3">
                 <!-- Title and Date -->
                 <div class="flex flex-col gap-1">
-                    <h3 class="text-2xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
-                        {{ project.name }}
-                    </h3>
+                    <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 class="text-2xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
+                            {{ project.name }}
+                        </h3>
+                        <span :class="statusBadgeClass" class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium">
+                            {{ projectStatusText }}
+                        </span>
+                    </div>
                     <div class="flex items-center gap-4 text-sm text-gray-400">
                         <span v-if="project.created_at">{{ formatDate(project.created_at) }}</span>
                     </div>
@@ -79,11 +78,11 @@
             </div>
 
             <!-- Actions with Hierarchy -->
-            <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <div class="flex w-full shrink-0 gap-2 sm:w-auto">
                 <!-- Primary Action -->
                 <Link
                     :href="route('project.show', project.id)"
-                    class="group/btn inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/25 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
+                    class="group/btn inline-flex flex-1 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl hover:shadow-blue-500/25 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
                     :aria-label="trans('portfolio.view_project_details')"
                     data-umami-event="Click into Project Details"
                 >
@@ -104,46 +103,44 @@
                 </Link>
 
                 <!-- Secondary Actions -->
-                <div class="flex gap-2">
-                    <a
-                        v-if="project.live_url"
-                        :href="project.live_url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group/btn inline-flex items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-                        :aria-label="trans('portfolio.view_live_demo')"
-                        data-umami-event="Click into Live Demo"
+                <a
+                    v-if="project.live_url"
+                    :href="project.live_url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group/btn inline-flex flex-1 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
+                    :aria-label="trans('portfolio.view_live_demo')"
+                    data-umami-event="Click into Live Demo"
+                >
+                    <svg
+                        class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                     >
-                        <svg
-                            class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            />
-                        </svg>
-                    </a>
-                    <a
-                        v-if="project.github_url"
-                        :href="project.github_url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group/btn inline-flex items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-                        :aria-label="trans('portfolio.view_source_code_gh')"
-                        data-umami-event="Click into GitHub"
-                    >
-                        <svg class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"
-                            />
-                        </svg>
-                    </a>
-                </div>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                    </svg>
+                </a>
+                <a
+                    v-if="project.github_url"
+                    :href="project.github_url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group/btn inline-flex flex-1 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-700/50 p-3 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-gray-500 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
+                    :aria-label="trans('portfolio.view_source_code_gh')"
+                    data-umami-event="Click into GitHub"
+                >
+                    <svg class="h-5 w-5 transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"
+                        />
+                    </svg>
+                </a>
             </div>
         </div>
 
@@ -158,8 +155,7 @@
 import { Project } from '@/types';
 
 import { Link } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
-import { inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 
 const trans = inject('trans') as (key: string, replacements?: Record<string, string | number>) => string;
 

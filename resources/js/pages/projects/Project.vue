@@ -114,7 +114,7 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
+                <div class="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800" v-if="project.live_url || project.github_url">
                     <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">{{ trans('portfolio.actions') }}</h2>
 
                     <div class="space-y-4">

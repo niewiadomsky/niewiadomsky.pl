@@ -19,6 +19,7 @@ return [
     'designer' => 'Projektant',
     'freelancer' => 'Freelancer',
     'experience' => 'Doświadczenie',
+    'experience_description' => 'Moja zawodowa podróż i doświadczenie w branży technologicznej.',
     'years_experience' => 'Lat doświadczenia',
     'projects_completed' => 'Ukończone projekty',
     'happy_clients' => 'Zadowoleni klienci',

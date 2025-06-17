@@ -31,7 +31,7 @@ class LanguageController extends Controller
         // Store the locale in session for future requests
         Session::put('locale', $locale);
 
-        return back()->with('message', __('Language switched successfully'));
+        return back();
     }
 
     /**

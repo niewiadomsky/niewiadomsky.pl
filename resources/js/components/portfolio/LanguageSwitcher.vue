@@ -4,7 +4,7 @@
             <button
                 @click="switchLanguage(language.code)"
                 class="flag-background-icon h-6 w-8 rounded transition-all duration-200 hover:scale-105"
-                :class="[language.code === currentLocale ? 'border-2 border-orange-500' : 'hover:border-orange-100', language.flagClass]"
+                :class="[language.code === currentLocale ? 'border-2 border-green-500' : 'hover:border-orange-100', language.flagClass]"
                 :title="language.tooltip"
                 data-umami-event="Change language to {{ language.name }}"
             ></button>
@@ -44,11 +44,12 @@ const switchLanguage = (locale: string) => {
     }
 
     // Make a POST request to switch language
-    router.reload(
+    router.post(
+        route('language.switch'),
         {
-            headers: {
-                'Accept-Language': locale,
-            },
+            locale: locale,
+        },
+        {
             async: false,
             showProgress: true,
         },

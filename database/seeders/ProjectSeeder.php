@@ -64,7 +64,7 @@ class ProjectSeeder extends Seeder
                     'en' => 'Minecraft server website where you can buy virtual currency. Admin panel written from scratch. Backend integrated with the server database to retrieve player information and statistics. Ability to send support tickets to Discord from the web level. Communication with the Minecraft server using the RCON protocol.',
                 ],
                 'live_url' => null,
-                'github_url' => null,
+                'github_url' => 'https://github.com/niewiadomsky/famecraft',
                 'iframe_url' => null,
                 'order' => 3,       
                 'skills' => ['laravel', 'mysql', 'php', 'javascript', 'html', 'css'],

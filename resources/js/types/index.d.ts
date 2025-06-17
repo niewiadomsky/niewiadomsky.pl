@@ -93,3 +93,10 @@ export interface ExperienceEntry {
     description: string;
     order: number;
 }
+
+export interface Resume {
+    id: number;
+    name: string;
+    language: string;
+    download_url: string;
+}
